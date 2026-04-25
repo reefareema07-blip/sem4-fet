@@ -47,29 +47,24 @@
             color: #555;
         }
 
-        a {
+        button {
             display: inline-block;
             margin-top: 15px;
-            text-decoration: none;
             color: white;
             background: #3498db;
             padding: 8px 15px;
             border-radius: 5px;
+            border: none;
+            cursor: pointer;
         }
 
-        a:hover {
+        button:hover {
             background: #2980b9;
         }
 
         .subtitle {
             text-align: center;
             color: #7f8c8d;
-        }
-
-        #message {
-            margin-top: 15px;
-            color: green;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -113,26 +108,24 @@
         <li>Listening to music</li>
     </ul>
 
-    <!-- Your original link -->
-    <a href="https://reefareema07-blip.github.io/sem4-fet/" target="_blank" onclick="showMessage()">
-        View My Resume
-    </a>
-
-    <p id="message"></p>
+    <!-- Button -->
+    <button onclick="openResume()">View My Resume</button>
 
 </div>
 
 <script>
-    // Runs when page loads
-    window.onload = function() {
-        console.log("Page loaded successfully");
-    };
+function openResume() {
+    // Prompt box
+    let name = prompt("Enter your name:");
 
-    // Runs when link is clicked
-    function showMessage() {
-        document.getElementById("message").innerHTML = "Opening your resume...";
-        alert("Redirecting to your resume!");
+    // If user enters something
+    if (name != null && name !== "") {
+        alert("Hello " + name + "! Opening your resume...");
+        window.open("https://reefareema07-blip.github.io/sem4-fet/", "_blank");
+    } else {
+        alert("You didn't enter your name!");
     }
+}
 </script>
 
 </body>
