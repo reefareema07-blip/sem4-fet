@@ -2,44 +2,45 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Form Validation</title>
+<title>Form with Loops & Inputs</title>
 
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background-color: #eef2f3;
+        font-family: Arial;
+        background: #f0f2f5;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 40px;
+        justify-content: center;
+        padding: 20px;
     }
 
-    .form-box {
+    .box {
         background: white;
         padding: 20px;
+        width: 400px;
         border-radius: 10px;
-        width: 320px;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    label {
+    fieldset {
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    legend {
         font-weight: bold;
     }
 
-    input, textarea {
-        width: 100%;
-        padding: 8px;
-        margin-top: 5px;
-        margin-bottom: 12px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+    .error {
+        color: red;
+        margin-bottom: 10px;
     }
 
     button {
         width: 100%;
         padding: 10px;
-        background-color: #007bff;
+        background: green;
         color: white;
         border: none;
         border-radius: 5px;
@@ -47,75 +48,60 @@
     }
 
     button:hover {
-        background-color: #0056b3;
+        background: darkgreen;
     }
 
-    .error {
-        color: red;
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
-
-    .result-box {
-        margin-top: 20px;
-        background: white;
-        padding: 15px;
-        border-radius: 10px;
-        width: 320px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        display: none;
-    }
-
-    .row {
-        display: flex;
-        margin: 5px 0;
-    }
-
-    .key {
-        width: 90px;
-        font-weight: bold;
+    .output {
+        margin-top: 15px;
+        background: #e9ffe9;
+        padding: 10px;
+        border-radius: 5px;
     }
 </style>
 </head>
 
 <body>
 
-<div class="form-box">
-    <h2>Registration Form</h2>
+<div class="box">
 
-    <div class="error" id="errorMsg"></div>
+<h2>Student Form</h2>
 
-    <form id="myForm">
-        <label>Name</label>
-        <input type="text" id="name" required>
+<div class="error" id="error"></div>
 
-        <label>Email</label>
-        <input type="email" id="email" required>
+<form id="myForm">
 
-        <label>Message</label>
-        <textarea id="message" rows="4" required></textarea>
+<!-- TEXT INPUT -->
+<fieldset>
+    <legend>Personal Info</legend>
 
-        <button type="submit">Submit</button>
-    </form>
-</div>
+    <label>Name:</label>
+    <input type="text" id="name"><br><br>
 
-<div class="result-box" id="resultBox">
-    <h3>Submitted Details</h3>
+    <label>Age:</label>
+    <input type="number" id="age">
+</fieldset>
 
-    <div class="row">
-        <div class="key">Name:</div>
-        <div id="rName"></div>
-    </div>
+<!-- RADIO BUTTON -->
+<fieldset>
+    <legend>Gender</legend>
+    <input type="radio" name="gender" value="Male"> Male<br>
+    <input type="radio" name="gender" value="Female"> Female<br>
+</fieldset>
 
-    <div class="row">
-        <div class="key">Email:</div>
-        <div id="rEmail"></div>
-    </div>
+<!-- CHECKBOX -->
+<fieldset>
+    <legend>Hobbies</legend>
+    <input type="checkbox" value="Reading"> Reading<br>
+    <input type="checkbox" value="Sports"> Sports<br>
+    <input type="checkbox" value="Music"> Music<br>
+</fieldset>
 
-    <div class="row">
-        <div class="key">Message:</div>
-        <div id="rMessage"></div>
-    </div>
+<button type="submit">Submit</button>
+
+</form>
+
+<div class="output" id="output"></div>
+
 </div>
 
 <script>
@@ -123,38 +109,59 @@ document.getElementById("myForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
     let name = document.getElementById("name").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let message = document.getElementById("message").value.trim();
-    let errorMsg = document.getElementById("errorMsg");
+    let age = document.getElementById("age").value.trim();
+    let error = document.getElementById("error");
+    let output = document.getElementById("output");
 
-    errorMsg.textContent = "";
+    error.textContent = "";
+    output.innerHTML = "";
 
-    // Validation rules
-    let nameHasNumber = /\d/.test(name);
-    let messageOnlyNumbers = /^\d+$/.test(message);
-    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // ❌ Validation (no numbers in name using WHILE-style check logic)
+    let i = 0;
+    while (i < name.length) {
+        if (!isNaN(name[i]) && name[i] !== " ") {
+            error.textContent = "Name should NOT contain numbers!";
+            return;
+        }
+        i++;
+    }
 
-    if (nameHasNumber) {
-        errorMsg.textContent = "Name should not contain numbers!";
+    // RADIO BUTTON CHECK
+    let gender = "";
+    let radios = document.getElementsByName("gender");
+    for (let j = 0; j < radios.length; j++) {
+        if (radios[j].checked) {
+            gender = radios[j].value;
+        }
+    }
+
+    if (gender === "") {
+        error.textContent = "Please select gender!";
         return;
     }
 
-    if (!emailPattern.test(email)) {
-        errorMsg.textContent = "Enter a valid email address!";
+    // CHECKBOX LOOP
+    let hobbies = [];
+    let boxes = document.querySelectorAll("input[type='checkbox']");
+    for (let k = 0; k < boxes.length; k++) {
+        if (boxes[k].checked) {
+            hobbies.push(boxes[k].value);
+        }
+    }
+
+    if (hobbies.length === 0) {
+        error.textContent = "Select at least one hobby!";
         return;
     }
 
-    if (messageOnlyNumbers) {
-        errorMsg.textContent = "Message cannot contain only numbers!";
-        return;
-    }
-
-    // Show output if valid
-    document.getElementById("rName").textContent = name;
-    document.getElementById("rEmail").textContent = email;
-    document.getElementById("rMessage").textContent = message;
-
-    document.getElementById("resultBox").style.display = "block";
+    // OUTPUT
+    output.innerHTML = `
+        <h3>Submitted Data</h3>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Age:</b> ${age}</p>
+        <p><b>Gender:</b> ${gender}</p>
+        <p><b>Hobbies:</b> ${hobbies.join(", ")}</p>
+    `;
 });
 </script>
 
