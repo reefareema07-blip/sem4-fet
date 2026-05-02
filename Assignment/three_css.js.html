@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Form with Display Output</title>
+<title>Form Validation</title>
 
 <style>
     body {
@@ -21,10 +21,6 @@
         border-radius: 10px;
         width: 320px;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-        text-align: center;
     }
 
     label {
@@ -54,6 +50,12 @@
         background-color: #0056b3;
     }
 
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
     .result-box {
         margin-top: 20px;
         background: white;
@@ -80,6 +82,8 @@
 
 <div class="form-box">
     <h2>Registration Form</h2>
+
+    <div class="error" id="errorMsg"></div>
 
     <form id="myForm">
         <label>Name</label>
@@ -115,19 +119,43 @@
 </div>
 
 <script>
-    document.getElementById("myForm").addEventListener("submit", function(e) {
-        e.preventDefault();
+document.getElementById("myForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-        let name = document.getElementById("name").value;
-        let email = document.getElementById("email").value;
-        let message = document.getElementById("message").value;
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let message = document.getElementById("message").value.trim();
+    let errorMsg = document.getElementById("errorMsg");
 
-        document.getElementById("rName").textContent = name;
-        document.getElementById("rEmail").textContent = email;
-        document.getElementById("rMessage").textContent = message;
+    errorMsg.textContent = "";
 
-        document.getElementById("resultBox").style.display = "block";
-    });
+    // Validation rules
+    let nameHasNumber = /\d/.test(name);
+    let messageOnlyNumbers = /^\d+$/.test(message);
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (nameHasNumber) {
+        errorMsg.textContent = "Name should not contain numbers!";
+        return;
+    }
+
+    if (!emailPattern.test(email)) {
+        errorMsg.textContent = "Enter a valid email address!";
+        return;
+    }
+
+    if (messageOnlyNumbers) {
+        errorMsg.textContent = "Message cannot contain only numbers!";
+        return;
+    }
+
+    // Show output if valid
+    document.getElementById("rName").textContent = name;
+    document.getElementById("rEmail").textContent = email;
+    document.getElementById("rMessage").textContent = message;
+
+    document.getElementById("resultBox").style.display = "block";
+});
 </script>
 
 </body>
