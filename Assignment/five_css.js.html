@@ -1,96 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Z-Index Stacking Lab</title>
-    <style>
-        /* CSS SECTION */
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f7f6;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
 
-        .info {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+<meta charset="UTF-8">
 
-        .container {
-            position: relative;
-            width: 350px;
-            height: 350px;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .card {
-            width: 200px;
-            height: 250px;
-            position: absolute; /* Crucial: z-index only works on positioned elements */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            user-select: none;
-        }
+<title>Z-Index Stacking Lab</title>
 
-        /* Initial positions and colors */
-        .red   { background: linear-gradient(135deg, #ff5f6d, #ffc371); top: 0; left: 0; }
-        .blue  { background: linear-gradient(135deg, #2193b0, #6dd5ed); top: 40px; left: 40px; }
-        .green { background: linear-gradient(135deg, #11998e, #38ef7d); top: 80px; left: 80px; }
+<style>
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-    </style>
+body{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+background:linear-gradient(to right,#1e3c72,#2a5298);
+font-family:Arial,sans-serif;
+color:white;
+}
+
+.info{
+text-align:center;
+margin-bottom:40px;
+}
+
+.container{
+position:relative;
+width:350px;
+height:350px;
+}
+
+.card{
+width:200px;
+height:250px;
+position:absolute;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:25px;
+font-weight:bold;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.red{
+background:#ff4b5c;
+top:0;
+left:0;
+}
+
+.blue{
+background:#3498db;
+top:40px;
+left:40px;
+}
+
+.green{
+background:#2ecc71;
+top:80px;
+left:80px;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+a{
+text-decoration:none;
+background:white;
+color:#1e3c72;
+padding:10px 15px;
+border-radius:8px;
+font-weight:bold;
+margin-top:20px;
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <div class="info">
-        <h1>Dynamic Z-Index Stacking</h1>
-        <p>Click any card to bring it to the front.</p>
-    </div>
+<div class="info">
 
-    <div class="container">
-        <!-- JavaScript functions are called via the onclick attribute -->
-        <div id="card1" class="card red" onclick="bringToFront('card1')">Card 1</div>
-        <div id="card2" class="card blue" onclick="bringToFront('card2')">Card 2</div>
-        <div id="card3" class="card green" onclick="bringToFront('card3')">Card 3</div>
-    </div>
-    a href="https://reefareema07-blip.github.io/sem4-fet/">
-        My resume</a>
+<h1 style="color:#ffd700;">
+Dynamic Z-Index Stacking
+</h1>
 
-    <script>
-        
-        
-        // We track the highest Z-index globally
-        let highestZ = 1;
+<p>
+Click any card to bring it to the front.
+</p>
 
-        function bringToFront(elementId) {
-            // 1. Increment the counter so the new value is always the highest
-            highestZ++;
+</div>
 
-            // 2. Select the specific element by ID
-            const element = document.getElementById(elementId);
+<div class="container">
 
-            // 3. Update the CSS zIndex property via JavaScript
-            element.style.zIndex = highestZ;
-            
-            console.log(`Element ${elementId} is now at z-index: ${highestZ}`);
-        }
-    </script>
+<div id="card1" class="card red"
+onclick="bringToFront('card1')">
+Card 1
+</div>
+
+<div id="card2" class="card blue"
+onclick="bringToFront('card2')">
+Card 2
+</div>
+
+<div id="card3" class="card green"
+onclick="bringToFront('card3')">
+Card 3
+</div>
+
+</div>
+
+<br><br>
+
+<a href="https://reefareema07-blip.github.io/sem4-fet/">
+My Resume
+</a>
+
+<script>
+
+let highestZ=1;
+
+function bringToFront(elementId){
+
+highestZ++;
+
+const element=document.getElementById(elementId);
+
+element.style.zIndex=highestZ;
+
+}
+
+</script>
+
 </body>
 </html>
-
