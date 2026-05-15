@@ -2,148 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Z-Index & Loop Lab</title>
+    <title>Z-Index Stacker</title>
     <style>
-        
-        body {
-            background-color: #1a1a2e;
-            color: #ffffff;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden;
+        body { background: #222; color: white; text-align: center; font-family: sans-serif; }
+        .container { position: relative; width: 300px; height: 300px; margin: 50px auto; }
+        .card { 
+            width: 150px; height: 200px; position: absolute; 
+            border-radius: 10px; cursor: pointer; border: 2px solid #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; transition: transform 0.2s;
         }
-
-        .interface {
-            text-align: center;
-            margin-bottom: 40px;
-            z-index: 1000; /* Keep UI above cards */
-        }
-
-        .container {
-            position: relative; /* Context for absolute children */
-            width: 300px;
-            height: 300px;
-        }
-
-        .card {
-            width: 180px;
-            height: 240px;
-            position: absolute; /* CRITICAL: Required for z-index to function */
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            cursor: pointer;
-            transition: transform 0.3s ease, border 0.2s;
-            border: 2px solid rgba(255,255,255,0.1);
-            user-select: none;
-        }
-
-        .card:hover {
-            transform: scale(1.05) translateY(-10px);
-            border-color: rgba(255,255,255,0.5);
-        }
-
-        .card-number {
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        button {
-            padding: 10px 25px;
-            font-size: 1rem;
-            background: #e94560;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #ff5e78;
-        }
+        button { padding: 10px 20px; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <div class="interface">
-        <h1>Stacking Order Project</h1>
-        <p>Created using <b>While Loops</b>. Click a card to bring it to front.</p>
-        <button id="resetBtn">Reset Stacking</button>
-    </div>
-
-    <!-- The container where JavaScript will inject our elements -->
-    <div id="card-field" class="container"></div>
+    <h1>Card Stacker</h1>
+    <button id="resetBtn">Reset Stack (Using While Loop)</button>
+    <div id="app" class="container"></div>
 
     <script>
-        
-        
-        const cardField = document.getElementById('card-field');
+        // 1. Setup Variables
+        const app = document.getElementById('app');
         const resetBtn = document.getElementById('resetBtn');
-        
-        
         let highestZ = 10;
-        const totalCards = 5;
-        const colors = ['#0f3460', '#e94560', '#16213e', '#0074d9', '#2ecc40'];
+        const colors = ['red', 'blue', 'green', 'orange', 'purple'];
 
-        
+        // 2. WHILE LOOP to create cards
         let i = 0;
-        while (i < totalCards) {
-            // Create the element
+        while (i < 5) {
             const card = document.createElement('div');
             card.className = 'card';
             card.style.backgroundColor = colors[i];
-            
-            
-            card.style.left = (i * 35) + "px";
-            card.style.top = (i * 25) + "px";
-            card.style.zIndex = i; // Initial stack based on loop index
+            card.style.left = (i * 30) + "px";
+            card.style.top = (i * 30) + "px";
+            card.style.zIndex = i; // Initial z-index
+            card.innerText = "Card " + i;
 
-            
-            card.innerHTML = `<span class="card-number">${i + 1}</span><small>z-index: ${i}</small>`;
-
-            
-            card.addEventListener('click', function() {
+            // Manipulate Z-Index on click
+            card.onclick = function() {
                 highestZ++;
                 this.style.zIndex = highestZ;
-                this.querySelector('small').innerText = `z-index: ${highestZ}`;
-            });
+            };
 
-            // Append to the DOM
-            cardField.appendChild(card);
+            app.appendChild(card);
             i++;
         }
 
-        
-        let checkCount = 0;
+        // 3. DO...WHILE LOOP to confirm setup
+        let logCount = 0;
         do {
-            console.log(`System check: Card ${checkCount + 1} is linked and ready.`);
-            checkCount++;
-        } while (checkCount < totalCards);
+            console.log("Card " + logCount + " is ready.");
+            logCount++;
+        } while (logCount < 5);
 
-        
-        resetBtn.onclick = function() {
-            const allCards = document.querySelectorAll('.card');
+        // 4. RESET BUTTON LOGIC (The fix)
+        resetBtn.addEventListener('click', function() {
+            const allCards = document.getElementsByClassName('card');
             let j = 0;
+            // Use a WHILE loop to reset every card's z-index
             while (j < allCards.length) {
-                allCards[j].style.zIndex = j;
-                allCards[j].querySelector('small').innerText = `z-index: ${j}`;
+                allCards[j].style.zIndex = j; // Reset to original order
                 j++;
             }
-            highestZ = 10; // Reset global counter
-            console.log("Stack reset performed via While Loop.");
-        };
+            highestZ = 10; // Reset our counter
+            alert("Stack Reset!");
+        });
     </script>
 </body>
 </html>
-
