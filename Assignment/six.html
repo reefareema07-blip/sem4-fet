@@ -1,15 +1,82 @@
 <!DOCTYPE html>
 <html>
+<head>
+
+<title>HTML Table</title>
+
 <style>
-table, th, td {
-border:1px solid black;
+
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(to right,#1e3c72,#2a5298);
+margin:0;
+padding:40px;
+text-align:center;
+color:white;
 }
+
+.container{
+width:70%;
+margin:auto;
+background:rgba(255,255,255,0.15);
+padding:25px;
+border-radius:12px;
+}
+
+h2{
+color:#ffd700;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+background:rgba(255,255,255,0.1);
+}
+
+th,td{
+border:2px solid white;
+padding:12px;
+text-align:center;
+}
+
+th{
+background:#ffd700;
+color:black;
+}
+
+td{
+color:white;
+}
+
+a{
+display:inline-block;
+margin-top:20px;
+padding:10px 15px;
+background:white;
+color:#1e3c72;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+a:hover{
+background:#ffd700;
+color:black;
+}
+
 </style>
+
+</head>
+
 <body>
 
-<h2>A basic HTML table</h2>
+<div class="container">
 
-<table style="width:100%">
+<h2>A Basic HTML Table</h2>
+
+<table>
+
 <tr>
 <th>NAME</th>
 <th>COLLEGE</th>
@@ -30,9 +97,11 @@ border:1px solid black;
 
 </table>
 
-<a href="https://reefareema07-blip.github.io/sem4-fet/">My resume</a>
+<a href="https://reefareema07-blip.github.io/sem4-fet/">
+My Resume
+</a>
 
-
+</div>
 
 </body>
 </html>
