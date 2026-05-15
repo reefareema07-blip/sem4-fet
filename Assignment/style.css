@@ -1,8 +1,9 @@
 /* Basic reset */
 body {
     font-family: Arial, sans-serif;
-    background: #fad0c4;
+    background: linear-gradient(to right,#1e3c72,#2a5298);
     margin: 0;
+    color: white;
 }
 
 /* Main box */
@@ -10,19 +11,19 @@ body {
     width: 70%;
     margin: 40px auto;
     padding: 20px;
-    background: white;
+    background: rgba(255,255,255,0.15);
     border-radius: 10px;
 }
 
 /* Heading */
 h1 {
     text-align: center;
-    color: #ff4e50;
+    color: #ffd700;
 }
 
 /* List */
 ol li {
-    background: #ff9966;
+    background: rgba(255,255,255,0.2);
     color: white;
     margin: 10px 0;
     padding: 10px;
@@ -40,8 +41,9 @@ a {
     text-align: center;
     margin-top: 20px;
     padding: 10px;
-    background: #ff4e50;
-    color: white;
+    background: white;
+    color: #1e3c72;
     text-decoration: none;
     border-radius: 5px;
+    font-weight: bold;
 }
