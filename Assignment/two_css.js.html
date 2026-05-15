@@ -4,22 +4,49 @@
     <title>Technical Skills List</title>
 
     <style>
+
         body{
-            background-color:#eef2fe;
+            background:linear-gradient(to right,#1e3c72,#2a5298);
             font-family:Arial;
             padding:20px;
+            color:white;
+            text-align:center;
         }
 
         input,select,button{
             margin:5px;
-            padding:5px;
+            padding:8px;
+            border:none;
+            border-radius:5px;
+        }
+
+        button{
+            background:#ffd700;
+            color:black;
+            font-weight:bold;
+        }
+
+        ol{
+            width:60%;
+            margin:auto;
+            text-align:left;
         }
 
         ul{
-            background:white;
+            background:rgba(255,255,255,0.15);
             padding:10px;
-            border-radius:5px;
+            border-radius:8px;
         }
+
+        a{
+            text-decoration:none;
+            background:white;
+            color:#1e3c72;
+            padding:10px 15px;
+            border-radius:8px;
+            font-weight:bold;
+        }
+
     </style>
 </head>
 
@@ -36,89 +63,97 @@
 </select>
 
 <button onclick="addSkill()">Add</button>
+
 <button onclick="removeSkill()">Remove</button>
 
 <ol>
 
-    <li>
-        Programming Languages
-        <ul id="prog">
-            <li>C</li>
-            <li>Python</li>
-            <li>Java</li>
-        </ul>
-    </li>
+<li>
+Programming Languages
+<ul id="prog">
+<li>C</li>
+<li>Python</li>
+<li>Java</li>
+</ul>
+</li>
 
-    <li>
-        Tools and Technologies
-        <ul id="tools">
-            <li>VS Code</li>
-            <li>Git</li>
-            <li>Linux</li>
-        </ul>
-    </li>
+<li>
+Tools and Technologies
+<ul id="tools">
+<li>VS Code</li>
+<li>Git</li>
+<li>Linux</li>
+</ul>
+</li>
 
-    <li>
-        Core Computer Science
-        <ul id="core">
-            <li>Programming</li>
-            <li>Data Structures</li>
-            <li>Algorithms</li>
-        </ul>
-    </li>
+<li>
+Core Computer Science
+<ul id="core">
+<li>Programming</li>
+<li>Data Structures</li>
+<li>Algorithms</li>
+</ul>
+</li>
 
 </ol>
 
+<br>
+
 <p>
-    a href="https://reefareema07-blip.github.io/sem4-fet/">
-        My resume</a>
+
+<a href="https://reefareema07-blip.github.io/sem4-fet/">
+My Resume
+</a>
+
 </p>
 
 <script>
 
 function getList(){
-    return document.getElementById(categorySelect.value);
+return document.getElementById(categorySelect.value);
 }
 
 function addSkill(){
 
-    let val = skillInput.value.trim();
+let val=skillInput.value.trim();
 
-    if(!val)
-        return alert("Enter skill");
+if(!val)
+return alert("Enter skill");
 
-    let list = getList();
+let list=getList();
 
-    for(let li of list.children){
+for(let li of list.children){
 
-        if(li.textContent.toLowerCase() === val.toLowerCase())
-            return alert("Already exists");
-    }
+if(li.textContent.toLowerCase()===val.toLowerCase())
+return alert("Already exists");
 
-    list.innerHTML += `<li>${val}</li>`;
+}
 
-    skillInput.value = "";
+list.innerHTML+=`<li>${val}</li>`;
+
+skillInput.value="";
 }
 
 function removeSkill(){
 
-    let val = skillInput.value.trim().toLowerCase();
+let val=skillInput.value.trim().toLowerCase();
 
-    let list = getList();
+let list=getList();
 
-    for(let li of list.children){
+for(let li of list.children){
 
-        if(li.textContent.toLowerCase() === val){
+if(li.textContent.toLowerCase()===val){
 
-            li.remove();
+li.remove();
 
-            skillInput.value = "";
+skillInput.value="";
 
-            return;
-        }
-    }
+return;
 
-    alert("Not Found");
+}
+}
+
+alert("Not Found");
 }
 
 </script>
