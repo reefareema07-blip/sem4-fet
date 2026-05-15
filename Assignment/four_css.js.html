@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Menu and List Box</title>
 
+<style>
+
+body{
+font-family:Arial;
+background:lightblue;
+text-align:center;
+margin-top:50px;
+}
+
+.box{
+background:white;
+width:300px;
+margin:auto;
+padding:20px;
+border-radius:10px;
+}
+
+select{
+width:200px;
+padding:5px;
+margin:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Course Selection</h2>
+
+<select id="menu">
+<option>Select Course</option>
+<option>C</option>
+<option>Java</option>
+<option>Python</option>
+</select>
+
+<br>
+
+<select id="list" size="3">
+<option>HTML</option>
+<option>CSS</option>
+<option>JavaScript</option>
+</select>
+
+<h3 id="result"></h3>
+
+</div>
+
+<script>
+
+let menu=document.getElementById("menu");
+let list=document.getElementById("list");
+
+menu.addEventListener("change",show);
+list.addEventListener("click",show);
+
+function show(){
+
+document.getElementById("result").innerHTML=
+"Menu: "+menu.value+
+"<br>List: "+list.value;
+
+}
+
+</script>
+
+</body>
+</html>
