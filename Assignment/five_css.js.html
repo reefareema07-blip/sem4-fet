@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Population Stack</title>
+
+<style>
+
+.city{
+width:200px;
+height:100px;
+position:absolute;
+color:white;
+text-align:center;
+line-height:100px;
+font-size:20px;
+}
+
+#city1{
+background:green;
+top:100px;
+left:100px;
+z-index:1;
+}
+
+#city2{
+background:orange;
+top:130px;
+left:130px;
+z-index:2;
+}
+
+button{
+margin-top:250px;
+padding:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="city1" class="city">
+Population: 5 Million
+</div>
+
+<div id="city2" class="city">
+Population: 10 Million
+</div>
+
+<button onclick="showHigh()">
+Show Highest Population
+</button>
+
+<script>
+
+function showHigh(){
+
+document.getElementById("city1").style.zIndex=3;
+
+}
+
+</script>
+
+</body>
+</html>
