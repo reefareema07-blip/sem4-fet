@@ -1,65 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Population Stack</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Index Stacking Lab</title>
+    <style>
+        /* CSS SECTION */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f7f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
+        .info {
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-.city{
-width:200px;
-height:100px;
-position:absolute;
-color:white;
-text-align:center;
-line-height:100px;
-font-size:20px;
-}
+        .container {
+            position: relative;
+            width: 350px;
+            height: 350px;
+        }
 
-#city1{
-background:green;
-top:100px;
-left:100px;
-z-index:1;
-}
+        .card {
+            width: 200px;
+            height: 250px;
+            position: absolute; /* Crucial: z-index only works on positioned elements */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            user-select: none;
+        }
 
-#city2{
-background:orange;
-top:130px;
-left:130px;
-z-index:2;
-}
+        /* Initial positions and colors */
+        .red   { background: linear-gradient(135deg, #ff5f6d, #ffc371); top: 0; left: 0; }
+        .blue  { background: linear-gradient(135deg, #2193b0, #6dd5ed); top: 40px; left: 40px; }
+        .green { background: linear-gradient(135deg, #11998e, #38ef7d); top: 80px; left: 80px; }
 
-button{
-margin-top:250px;
-padding:10px;
-}
-
-</style>
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
-
 <body>
 
-<div id="city1" class="city">
-Population: 5 Million
-</div>
+    <div class="info">
+        <h1>Dynamic Z-Index Stacking</h1>
+        <p>Click any card to bring it to the front.</p>
+    </div>
 
-<div id="city2" class="city">
-Population: 10 Million
-</div>
+    <div class="container">
+        <!-- JavaScript functions are called via the onclick attribute -->
+        <div id="card1" class="card red" onclick="bringToFront('card1')">Card 1</div>
+        <div id="card2" class="card blue" onclick="bringToFront('card2')">Card 2</div>
+        <div id="card3" class="card green" onclick="bringToFront('card3')">Card 3</div>
+    </div>
 
-<button onclick="showHigh()">
-Show Highest Population
-</button>
+    <script>
+        
+        
+        // We track the highest Z-index globally
+        let highestZ = 1;
 
-<script>
+        function bringToFront(elementId) {
+            // 1. Increment the counter so the new value is always the highest
+            highestZ++;
 
-function showHigh(){
+            // 2. Select the specific element by ID
+            const element = document.getElementById(elementId);
 
-document.getElementById("city1").style.zIndex=3;
-
-}
-
-</script>
-
+            // 3. Update the CSS zIndex property via JavaScript
+            element.style.zIndex = highestZ;
+            
+            console.log(`Element ${elementId} is now at z-index: ${highestZ}`);
+        }
+    </script>
 </body>
 </html>
+
