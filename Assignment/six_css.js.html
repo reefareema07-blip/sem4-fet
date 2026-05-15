@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Index Stacker Project</title>
+    <!-- Linking the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>Looping Card Stacker</h1>
+        <p>Cards generated via <b>While Loop</b>. Click to stack!</p>
+        <button id="resetBtn">Reset Stacking</button>
+    </div>
+
+    <div id="app" class="container"></div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    background-color: #2c3e50;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.header { text-align: center; margin-bottom: 20px; }
+
+.container {
+    position: relative; /* Context for children's absolute positioning */
+    width: 400px;
+    height: 400px;
+}
+
+.card {
+    width: 150px;
+    height: 200px;
+    position: absolute; /* REQUIRED for z-index to work */
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.card:hover { transform: scale(1.05); }
+
+button {
+    padding: 10px 20px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+let topLayer = 10;
+const appContainer = document.getElementById('app');
+const colors = ['#3498db', '#f1c40f', '#9b59b6', '#1abc9c', '#e67e22'];
+
+
+
+let i = 0;
+while (i < 5) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerText = "Card " + (i + 1);
+    
+  
+    card.style.backgroundColor = colors[i];
+    card.style.left = (i * 40) + "px";
+    card.style.top = (i * 40) + "px";
+    card.style.zIndex = i; // Starting order
+
+  
+    card.addEventListener('click', function() {
+        topLayer++; 
+        this.style.zIndex = topLayer; // Bring clicked card to front
+    });
+
+    appContainer.appendChild(card);
+    i++;
+}
+
+let count = 0;
+do {
+    console.log("Card " + (count + 1) + " successfully rendered.");
+    count++;
+} while (count < 5);
+
+
+document.getElementById('resetBtn').onclick = function() {
+    const allCards = document.querySelectorAll('.card');
+    let j = 0;
+    while (j < allCards.length) {
+        allCards[j].style.zIndex = j;
+        j++;
+    }
+    topLayer = 10;
+    console.log("Stack reset to original order.");
+};
