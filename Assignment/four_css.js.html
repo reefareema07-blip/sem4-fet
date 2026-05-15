@@ -7,23 +7,41 @@
 
 body{
 font-family:Arial;
-background:lightblue;
+background:linear-gradient(to right,#1e3c72,#2a5298);
 text-align:center;
 margin-top:50px;
+color:white;
 }
 
 .box{
-background:white;
-width:300px;
+background:rgba(255,255,255,0.15);
+width:320px;
 margin:auto;
 padding:20px;
-border-radius:10px;
+border-radius:12px;
 }
 
 select{
-width:200px;
-padding:5px;
+width:220px;
+padding:8px;
 margin:10px;
+border:none;
+border-radius:5px;
+}
+
+h2{
+color:#ffd700;
+}
+
+a{
+text-decoration:none;
+background:white;
+color:#1e3c72;
+padding:10px 15px;
+border-radius:8px;
+font-weight:bold;
+display:inline-block;
+margin-top:20px;
 }
 
 </style>
@@ -36,38 +54,48 @@ margin:10px;
 <h2>Course Selection</h2>
 
 <select id="menu">
+
 <option>Select Course</option>
 <option>C</option>
 <option>Java</option>
 <option>Python</option>
+
 </select>
 
 <br>
 
 <select id="list" size="3">
+
 <option>HTML</option>
 <option>CSS</option>
 <option>JavaScript</option>
+
 </select>
 
 <h3 id="result"></h3>
 
+<a href="https://reefareema07-blip.github.io/sem4-fet/">
+My Resume
+</a>
+
 </div>
-  a href="https://reefareema07-blip.github.io/sem4-fet/">
-        My resume</a>
 
 <script>
 
 let menu=document.getElementById("menu");
+
 let list=document.getElementById("list");
 
 menu.addEventListener("change",show);
+
 list.addEventListener("click",show);
 
 function show(){
 
 document.getElementById("result").innerHTML=
+
 "Menu: "+menu.value+
+
 "<br>List: "+list.value;
 
 }
