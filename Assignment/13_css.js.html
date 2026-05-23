@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Food Ordering Frontend</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    margin:0;
+    background:linear-gradient(to right,#1e3c72,#2a5298);
+    color:white;
+}
+
+header{
+    background:rgba(0,0,0,0.3);
+    padding:15px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:15px;
+    font-weight:bold;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.15);
+    width:250px;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.card img{
+    width:100%;
+    border-radius:10px;
+}
+
+button{
+    background:orange;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+form{
+    width:300px;
+    margin:40px auto;
+    background:rgba(255,255,255,0.15);
+    padding:20px;
+    border-radius:10px;
+}
+
+input,select{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:none;
+    border-radius:5px;
+}
+
+.cart{
+    text-align:center;
+    margin-top:20px;
+    font-size:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Online Food Order</h1>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Menu</a>
+        <a href="#">Cart</a>
+        <a href="#">Login</a>
+    </nav>
+</header>
+
+<div class="cart">
+    Cart Items: <span id="count">0</span>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Pizza">
+        <h2>Pizza</h2>
+        <p>₹199</p>
+        <button onclick="addCart()">Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Burger">
+        <h2>Burger</h2>
+        <p>₹99</p>
+        <button onclick="addCart()">Add to Cart</button>
+    </div>
+
+</div>
+
+<form onsubmit="return validateForm()">
+
+    <h2>Checkout Form</h2>
+
+    <input type="text" id="name" placeholder="Enter Name">
+
+    <input type="text" id="address" placeholder="Enter Address">
+
+    <select id="payment">
+        <option value="">Select Payment</option>
+        <option>UPI</option>
+        <option>Cash on Delivery</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Place Order</button>
+
+</form>
+
+<script>
+
+let cart=0;
+
+function addCart(){
+    cart++;
+    document.getElementById("count").innerHTML=cart;
+}
+
+function validateForm(){
+
+    let name=document.getElementById("name").value;
+    let address=document.getElementById("address").value;
+    let payment=document.getElementById("payment").value;
+
+    if(name=="" || address=="" || payment==""){
+        alert("Please fill all details");
+        return false;
+    }
+
+    alert("Order Placed Successfully");
+    return true;
+}
+
+</script>
+
+</body>
+</html>
